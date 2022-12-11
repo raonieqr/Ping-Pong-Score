@@ -77,6 +77,11 @@ body{
     border: none;
 }
 
+#buttons button:hover{
+    border: 1px solid black;
+    cursor: pointer;
+}
+
 #btn1{
     background-color: rgb(61, 166, 252);
     color: white;
