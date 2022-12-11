@@ -1,58 +1,69 @@
-const btn1 = document.querySelector("#btn1");
-const btn2 = document.querySelector("#btn2");
-const btn3 = document.querySelector("#btn3");
-
-const score1 = document.querySelector("#play1");
-const score2 = document.querySelector("#play2");
+const reset = document.querySelector("#reset");
 const score_total = document.querySelector("#score-total");
 
-let scoreP1 = 0;
-let scoreP2 = 0;
+const play1 = {
+    score: 0,
+    button: document.querySelector("#play1"),
+    display: document.querySelector("#displayPlay1")
+}
+
+const play2 = {
+    score: 0,
+    button: document.querySelector("#play2"),
+    display: document.querySelector("#displayPlay2")
+}
+
 let gameOver = false;
 let winScore = 0;
 
-btn1.addEventListener("click", function(){
-    if (!gameOver)
-    {
-        scoreP1 += 1;
-        if (scoreP1 == winScore)
-        {
-            gameOver = true;
-            score1.classList.add("win");
-            score2.classList.add("loser");
-        }
-            
-    }
-    score1.textContent = scoreP1;
-});
 
-btn2.addEventListener("click", function(){
-    if (!gameOver)
-    {
-        scoreP2 += 1;
-        if (scoreP2 == winScore)
-        {
-            gameOver = true;
-            score2.classList.add("win");
-            score1.classList.add("loser");
-        }
-            
-    }
-    score2.textContent = scoreP2;
-});
 
 score_total.addEventListener("change", function(){
     winScore = parseInt(this.value);
 })
 
-btn3.addEventListener("click", function(e){
-    gameOver = false;
-    score1.textContent = 0;
-    score2.textContent = 0;
-    scoreP1 = 0;
-    scoreP2 = 0;
-    score1.classList.remove("win", "loser");
-    score2.classList.remove("win", "loser");
+play1.button.addEventListener("click", function(){
+    if (score_total.value == 0)
+        alert("Playing to no value!");
+    else
+        scoreAdd(play1, play2)
 });
 
 
+play2.button.addEventListener("click", function(){
+    if (score_total.value == 0)
+        alert("Playing to no value!");
+    else
+        scoreAdd(play2, play1)
+});
+
+
+reset.addEventListener("click", clearScore);
+
+
+function scoreAdd(player, opponent)
+{
+    if (!gameOver)
+    {
+        player.score += 1;
+        if (player.score == winScore)
+        {
+            gameOver = true;
+            player.display.classList.add("win");
+            opponent.display.classList.add("loser");
+        }
+            
+    }
+    player.display.textContent = player.score;
+}
+
+function clearScore()
+{
+    gameOver = false;
+    play1.display.textContent = 0;
+    play2.display.textContent = 0;
+    play1.score = 0;
+    play2.score = 0;
+    play1.display.classList.remove("win", "loser");
+    play2.display.classList.remove("win", "loser");
+}

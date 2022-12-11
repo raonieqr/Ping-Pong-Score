@@ -82,17 +82,17 @@ body{
     cursor: pointer;
 }
 
-#btn1{
+#play1{
     background-color: rgb(61, 166, 252);
     color: white;
 }
 
-#btn2{
+#play2{
     background-color: rgb(112, 197, 140);
     color: white;
 }
 
-#btn3{
+#reset{
     background-color: rgb(255, 91, 113);
     color: white;
 }
